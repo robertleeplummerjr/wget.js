@@ -1,5 +1,3 @@
-'use strict';
-
 function wget(urls, fn) {
 	urls = urls.push !== undefined ? urls : [urls];
 
@@ -17,7 +15,7 @@ function wget(urls, fn) {
 			if (request.status < 200 && request.status > 400) return;
 			results[i] = request.responseText;
 			complete++;
-			if (complete === total && fn !== undefined) fn(results);
+			if (complete === total && fn) fn.apply(null, results);
 		};
 		request.send();
 	});
